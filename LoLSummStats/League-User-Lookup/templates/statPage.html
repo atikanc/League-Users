@@ -1,0 +1,127 @@
+<style type="text/css">
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .tg td {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+
+    .tg th {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+
+    .tg .tg-c3ow {
+        border-color: inherit;
+        text-align: center;
+        vertical-align: top
+    }
+
+    .tg .tg-7btt {
+        border-color: inherit;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: top
+    }
+</style>
+
+<form action="." method="get">
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<h1>{{ name }}</h1>
+{% if advanced %}
+<h2>Account Information</h2>
+<p>Summoner ID: {{ SummonerID }}</p>
+<p>Account ID: {{ AccountID }}</p>
+<p>PUUID: {{ PUUID }}</p>
+
+<br>
+{% endif %}
+
+<h2>Summoner Information</h2>
+<p>Level: {{ Level }}</p>
+<p>Mastery: {{ MasteryScore }}</p>
+<p>Rank: {{ rank }}</p>
+<p>Rank LP: {{ rank_LP }}</p>
+<p>Rank W/L: {{ rank_WL }}</p>
+<p>Chests Earned: {{ chestsEarned }}</p>
+<p>Chamption Mastery Levels:
+    <table class="tg">
+        <thead>
+            <tr>
+                <th class="tg-7btt">Level<br></th>
+                <th class="tg-7btt">Count<br></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="tg-c3ow">7</td>
+                <td class="tg-c3ow">{{ masteryLevels.6 }}</td>
+            </tr>
+            <tr>
+                <td class="tg-c3ow">6</td>
+                <td class="tg-c3ow">{{ masteryLevels.5 }}</td>
+            </tr>
+            <tr>
+                <td class="tg-c3ow">5</td>
+                <td class="tg-c3ow">{{ masteryLevels.4 }}</td>
+            </tr>
+            <tr>
+                <td class="tg-c3ow">4</td>
+                <td class="tg-c3ow">{{ masteryLevels.3 }}</td>
+            </tr>
+            <tr>
+                <td class="tg-c3ow">3</td>
+                <td class="tg-c3ow">{{ masteryLevels.2 }}</td>
+            </tr>
+            <tr>
+                <td class="tg-c3ow">2</td>
+                <td class="tg-c3ow">{{ masteryLevels.1 }}</td>
+            </tr>
+            <tr>
+                <td class="tg-c3ow">1</td>
+                <td class="tg-c3ow">{{ masteryLevels.0 }}</td>
+            </tr>
+        </tbody>
+    </table>
+</p>
+
+<br>
+
+<h2>Summoner Champion Details</h2>
+<table class="tg">
+    <thead>
+        <tr>
+                {% for key,value in champion_specifics.0.items %}
+                    <th class="tg-7btt">{{ key }}</th>
+                {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in champion_specifics %}
+            <tr>
+                {% for key,value in item.items %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

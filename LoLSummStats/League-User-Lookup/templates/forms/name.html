@@ -1,0 +1,12 @@
+<h1>League User Lookup</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        <h2>{{ message }}</h2>
+    {% endfor %}
+{% endif %}
+
+<form action="." method="get">
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
