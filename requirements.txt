@@ -2,3 +2,4 @@ django
 environ
 django-environ
 django_heroku
+requests
