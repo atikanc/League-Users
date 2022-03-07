@@ -18,4 +18,5 @@ from django.urls import path,include
 
 urlpatterns = [
     path('', include('stats.urls')),
+    path('riot.txt', include('stats.urls')),
 ]
