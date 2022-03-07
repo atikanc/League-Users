@@ -40,10 +40,20 @@ def findSumm(userInput, request, adv):
     acount_rank_val = "N/A"
     acount_rank_LP = "N/A"
     acount_rank_WL = "N/A"
-    if(len(account_rank) != 0):
-        acount_rank_val = ("%s %s" % (account_rank[0].get("tier"), account_rank[0].get("rank")))
-        acount_rank_LP = ("%s" % account_rank[0].get("leaguePoints"))
-        acount_rank_WL = ("%s/%s" % (account_rank[0].get("wins"), (account_rank[0].get("losses"))))
+
+    acount_F_rank_val = "N/A"
+    acount_F_rank_LP = "N/A"
+    acount_F_rank_WL = "N/A"
+
+    for rank in account_rank:
+        if rank.get("queueType") == "RANKED_SOLO_5x5":
+            acount_rank_val = ("%s %s" % (rank.get("tier"), rank.get("rank")))
+            acount_rank_LP = ("%s" % rank.get("leaguePoints"))
+            acount_rank_WL = ("%s/%s" % (rank.get("wins"), (rank.get("losses"))))
+        if rank.get("queueType") == "RANKED_FLEX_SR":
+            acount_F_rank_val = ("%s %s" % (rank.get("tier"), rank.get("rank")))
+            acount_F_rank_LP = ("%s" % rank.get("leaguePoints"))
+            acount_F_rank_WL = ("%s/%s" % (rank.get("wins"), (rank.get("losses"))))
 
     champion_mastery_response = requests.get("https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + account_summId, headers = {"X-Riot-Token": API_key})
     champion_mastery_response = champion_mastery_response.json()
@@ -94,6 +104,9 @@ def findSumm(userInput, request, adv):
         'rank' : acount_rank_val,
         'rank_LP' : acount_rank_LP,
         'rank_WL' : acount_rank_WL,
+        'F_rank' : acount_F_rank_val,
+        'F_rank_LP' : acount_F_rank_LP,
+        'F_rank_WL' : acount_F_rank_WL,
         'masteryLevels' : mastery_levels,
         'chestsEarned' : chests_earned,
         'champion_specifics' : champion_specifics
